@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Style/List.css";
 import TaskShow from "./TaskShow";
+import TaskContext from "./Context/auth-context";
 
-function TaskList({ creatTask, onDelete, onUpdate }) {
+function TaskList({ onDelete, onUpdate }) {
+  const { creatTask } = useContext(TaskContext);
   return (
     <div className="cards">
       {creatTask.map((show, index) => {

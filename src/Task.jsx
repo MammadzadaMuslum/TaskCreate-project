@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Style/Task.css";
+import TaskContext from "./Context/auth-context";
 
-function Task({ onChange, show, handleEdit,onUpdate }) {
-  const [tittle, setTittle] = useState(show ? show.tittle:'');
-  const [text, setText] = useState(show ? show.text : '');
+function Task({ show, handleEdit, onUpdate }) {
+  const [tittle, setTittle] = useState(show ? show.tittle : "");
+  const [text, setText] = useState(show ? show.text : "");
+  const { createTask } = useContext(TaskContext);
   const handleChange = (e) => {
     setTittle(e.target.value);
   };
@@ -12,16 +14,16 @@ function Task({ onChange, show, handleEdit,onUpdate }) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(handleEdit){
-      onUpdate(show.id,tittle,text)
-    }else{
-      onChange(tittle, text);
+    if (handleEdit) {
+      onUpdate(show.id, tittle, text);
+    } else {
+      createTask(tittle, text);
     }
-  
+
     setTittle("");
     setText("");
   };
- 
+
   return (
     <div>
       {handleEdit ? (

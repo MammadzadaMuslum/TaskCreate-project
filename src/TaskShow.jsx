@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Style/Show.css";
 import Task from "./Task";
+import TaskContext from "./Context/auth-context";
 
-function TaskShow({ show, onDelete, onUpdate }) {
+function TaskShow({ show }) {
   const [taskEdit, setTaskEdit] = useState(false);
+  const { deletedTask, updatedTask } = useContext(TaskContext);
   const handleDelete = () => {
-    onDelete(show.id);
+    deletedTask(show.id);
   };
   const handleEdit = () => {
     setTaskEdit(!taskEdit);
   };
   const handleSubmit = (id, updateTittle, updateText) => {
     setTaskEdit(false);
-    onUpdate(id, updateTittle, updateText);
+    updatedTask(id, updateTittle, updateText);
   };
   return (
     <div>
